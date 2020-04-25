@@ -1852,6 +1852,29 @@ void wrenGetMapKeys(WrenVM* vm, int mapSlot, int listSlot)
   }
 }
 
+bool wrenGetMapKeyIndex(WrenVM *vm, int mapSlot, uint32_t keyIndex, int keySlot)
+{
+  validateApiSlot(vm, mapSlot);
+  validateApiSlot(vm, keySlot);
+  ASSERT(IS_MAP(vm->apiStack[mapSlot]), "Must get keys from a map.");
+  ObjMap* map = AS_MAP(vm->apiStack[mapSlot]);
+  MapEntry *entries = map->entries;
+  uint32_t nb_found = 0;
+  for (uint32_t i=0; i<map->capacity; i++) {
+    MapEntry *entry = &entries[i];
+    if (IS_UNDEFINED(entry->key))
+      continue;
+    if (nb_found == keyIndex) {
+      vm->apiStack[keySlot] = entry->key;
+      return true;
+    }
+    nb_found++;
+    if (nb_found == map->count)
+      break;
+  }
+  return false;
+}
+
 void wrenSwapSlot(WrenVM* vm, int slotX, int slotY)
 {
   validateApiSlot(vm, slotX);

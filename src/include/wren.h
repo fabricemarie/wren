@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 // The Wren semantic version number components.
 #define WREN_VERSION_MAJOR 0
@@ -499,6 +500,9 @@ int wrenGetMapCount(WrenVM* vm, int slot);
 // Build a list of keys that exist in the map stored at [mapSlot],
 // and store this list in [listSlot]
 void wrenGetMapKeys(WrenVM* vm, int mapSlot, int listSlot);
+
+// Return key [keyIndex] from the map at [mapSlot] and store it in slot [keySlot]
+bool wrenGetMapKeyIndex(WrenVM *vm, int mapSlot, uint32_t keyIndex, int keySlot);
 
 // Swap the value/object stored at [slotX] with value/object stored at [slotY]
 void wrenSwapSlot(WrenVM* vm, int slotX, int slotY);
