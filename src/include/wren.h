@@ -76,7 +76,7 @@ typedef WrenForeignMethodFn (*WrenBindForeignMethodFn)(WrenVM* vm,
     const char* signature);
 
 // Displays a string of text to the user.
-typedef void (*WrenWriteFn)(WrenVM* vm, const char* text);
+typedef void (*WrenWriteFn)(WrenVM* vm, const char* text, uint32_t length);
 
 typedef enum
 {

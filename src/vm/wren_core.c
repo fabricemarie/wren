@@ -1136,7 +1136,7 @@ DEF_PRIMITIVE(system_writeString)
 {
   if (vm->config.writeFn != NULL)
   {
-    vm->config.writeFn(vm, AS_CSTRING(args[1]));
+    vm->config.writeFn(vm, AS_STRING(args[1])->value, AS_STRING(args[1])->length);
   }
 
   RETURN_VAL(args[1]);

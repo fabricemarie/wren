@@ -238,9 +238,9 @@ static WrenForeignClassMethods bindForeignClass(
   return methods;
 }
 
-static void write(WrenVM* vm, const char* text)
+static void write(WrenVM* vm, const char* text, uint32_t length)
 {
-  printf("%s", text);
+  printf("%.*s", length, text);
 }
 
 static void reportError(WrenVM* vm, WrenErrorType type,
